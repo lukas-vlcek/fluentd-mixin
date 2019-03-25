@@ -52,7 +52,7 @@
           {
             alert: 'FluentdErrorsHigh',
             expr: |||
-              fluentd_output_status_num_errors > %(fluentdNumErrors)s
+              sum by(instance, job) (rate(fluentd_output_status_num_errors[1m])) > 10
             ||| % $._config,
             'for': '1m',
             labels: {
